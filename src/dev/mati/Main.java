@@ -5,7 +5,7 @@ public class Main {
         System.out.println((char) ('A' + 4));
 
         Theater theater = new Theater("ROMA musical theater",15,20);
-        //theater.getSeats();
+        theater.getSeats();
 
         reserveSeat(theater,"H11");
         reserveSeat(theater,"H11");

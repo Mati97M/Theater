@@ -1,11 +1,11 @@
 package dev.mati;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collection;
+import java.util.HashSet;
 
 public class Theater {
     private final String mName;
-    private List<Seat> seats = new LinkedList<>();
+    private Collection<Seat> seats = new HashSet<>();
 
     public Theater(String mName, int numRows, int seatsPerRow) {
         this.mName = mName;
