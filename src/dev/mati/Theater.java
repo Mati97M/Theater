@@ -1,11 +1,11 @@
 package dev.mati;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Theater {
     private final String mName;
-    private List<Seat> seats = new ArrayList<>();
+    private List<Seat> seats = new LinkedList<>();
 
     public Theater(String mName, int numRows, int seatsPerRow) {
         this.mName = mName;
