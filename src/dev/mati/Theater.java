@@ -1,11 +1,12 @@
 package dev.mati;
 
-import java.util.Collection;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Theater {
     private final String mName;
-    private Collection<Seat> seats = new LinkedHashSet<>();
+    private List<Seat> seats = new ArrayList<>();
 
     public Theater(String mName, int numRows, int seatsPerRow) {
         this.mName = mName;
@@ -24,18 +25,14 @@ public class Theater {
     }
 
     public boolean reserveSeat(String seatNumber) {
-        Seat requestSeat = null;
-        for (Seat seat: seats) {
-            if(seat.getSeatNumber().equals(seatNumber)) {
-                requestSeat = seat;
-                break;
-            }
-        }
-        if(requestSeat == null) {
+        Seat requestSeat = new Seat(seatNumber);
+        int foundSeat = Collections.binarySearch(seats, requestSeat,null);
+        if(foundSeat >= 0) {
+            return seats.get(foundSeat).reserve();
+        } else {
             System.out.println("There is no seat " + seatNumber);
             return false;
         }
-        return requestSeat.reserve();
     }
     public void getSeats() {
         for(Seat seat: seats) {
@@ -43,12 +40,17 @@ public class Theater {
         }
     }
 
-    private class Seat {
+    private class Seat implements Comparable<Seat> {
         private final String seatNumber;
         private boolean reserved = false;
 
         public Seat(String seatNumber) {
             this.seatNumber = seatNumber;
+        }
+
+        @Override
+        public int compareTo(Seat seat) {
+            return this.seatNumber.compareToIgnoreCase(seat.getSeatNumber());
         }
 
         public String getSeatNumber() {
